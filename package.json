@@ -9,17 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.3",
     "@types/node": "20.2.3",
-    "@types/react": "18.2.6",
+    "@types/react": "18.2.25",
     "@types/react-dom": "18.2.4",
+    "apexcharts": "^3.48.0",
     "autoprefixer": "10.4.14",
+    "axios": "^1.6.8",
+    "chart.js": "^4.4.2",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "next": "13.4.3",
+    "next-auth": "^4.24.7",
     "postcss": "8.4.23",
     "react": "18.2.0",
+    "react-apexcharts": "^1.4.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-data-table-component": "^7.6.2",
     "react-dom": "18.2.0",
+    "react-redux": "^9.1.1",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.8",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/redux-persist": "^4.3.1"
   }
 }
