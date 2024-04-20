@@ -1,9 +1,12 @@
 "use client";
+import useRequireAuth from "@/helpers/useAuth";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
 
 const Navbar = () => {
+  const { session } = useRequireAuth();
+  const userName = session?.user?.name?.toLocaleUpperCase() || "BACK"
   const pathname = usePathname();
   const handleSignOut = async () => {
     await signOut();
@@ -12,6 +15,9 @@ const Navbar = () => {
   return (
     <>
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <ul className="font-extrabold text-white p-4">
+          <h1>WELCOME {userName}</h1>
+        </ul>
         <ul className="space-y-2 font-medium">
           <li>
             <a

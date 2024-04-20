@@ -32,29 +32,24 @@ export default function Dashboard() {
       router.push("api/auth/signin");
     }
   });
-  
-  useEffect(() => {
-    dispatch(setLoading(true));
-    axios
-      .get("https://dummyjson.com/products")
-      .then((response) => {
-        dispatch(setProducts(response.data.products));
-        setCopiedProducts(response.data.products);
-      })
-      .catch((error) => {
-        dispatch(setError(error.message));
-      })
-      .finally(() => {
-        dispatch(setLoading(false));
-      });
-  }, [dispatch]);
 
-  if (isLoading)
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
+  useEffect(() => {
+    if (status === "authenticated") {
+      dispatch(setLoading(true));
+      axios
+        .get("https://dummyjson.com/products")
+        .then((response) => {
+          dispatch(setProducts(response.data.products));
+          setCopiedProducts(response.data.products);
+        })
+        .catch((error) => {
+          dispatch(setError(error.message));
+        })
+        .finally(() => {
+          dispatch(setLoading(false));
+        });
+    }
+  }, [dispatch]);
 
   const sumOfRatings = products.reduce(
     (acc: number, product: Product) => acc + product.rating,
@@ -113,20 +108,35 @@ export default function Dashboard() {
     },
   ];
 
+  if (isLoading)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+
   return (
-    <div>
-      <div className="flex content-center gap-3 pb-4">
-        <Card title="Average Rating" number={roundedAverageRating} />
-        <Card title="Total Products" number={products?.length || 0} />
-      </div>
-      <div className="pb-4">
-        <Input
-          placeholder="Search For Specific Title"
-          setInputData={setInputData}
-          onHandleSubmit={onHandleSubmit}
-        />
-      </div>
-      <Table data={copiedProducts} colums={columns} title="List of Products" />
-    </div>
+    <>
+      {status === "authenticated" && (
+        <div>
+          <div className="flex content-center gap-3 pb-4">
+            <Card title="Average Rating" number={roundedAverageRating} />
+            <Card title="Total Products" number={products?.length || 0} />
+          </div>
+          <div className="pb-4">
+            <Input
+              placeholder="Search For Specific Title"
+              setInputData={setInputData}
+              onHandleSubmit={onHandleSubmit}
+            />
+          </div>
+          <Table
+            data={copiedProducts}
+            colums={columns}
+            title="List of Products"
+          />
+        </div>
+      )}
+    </>
   );
 }
