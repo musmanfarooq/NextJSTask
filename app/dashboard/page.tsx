@@ -25,7 +25,7 @@ export default function Dashboard() {
   const products = useSelector(selectProducts);
   const { isLoading } = useGetProductsQuery({});
   const [inputData, setInputData] = useState("");
-  const [copiedProducts, setCopiedProducts] = useState([]);
+  const [copiedProducts, setCopiedProducts] = useState(products);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -34,13 +34,13 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
+    setCopiedProducts(products);
     if (status === "authenticated") {
       dispatch(setLoading(true));
       axios
         .get("https://dummyjson.com/products")
         .then((response) => {
           dispatch(setProducts(response.data.products));
-          setCopiedProducts(response.data.products);
         })
         .catch((error) => {
           dispatch(setError(error.message));
@@ -63,7 +63,7 @@ export default function Dashboard() {
       return setCopiedProducts(products);
     }
     const filteredProducts = products.filter((item: Product) => {
-      return item.title === inputData;
+      return item.title.includes(inputData);
     });
     setCopiedProducts(filteredProducts);
   };
@@ -119,7 +119,7 @@ export default function Dashboard() {
     <>
       {status === "authenticated" && (
         <div>
-          <div className="flex content-center gap-3 pb-4">
+          <div className="flex content-center gap-3 pb-4 flex-col md:flex-row">
             <Card title="Average Rating" number={roundedAverageRating} />
             <Card title="Total Products" number={products?.length || 0} />
           </div>

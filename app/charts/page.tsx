@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/Navbar/NavBar";
 import ChartComponent from "@/components/charts/Chart";
 import useRequireAuth from "@/helpers/useAuth";
 import { Product } from "@/interfaces/products";
@@ -25,8 +26,8 @@ export default function Dashboard() {
   return (
     <>
       {status === "authenticated" && (
-        <div className="flex">
-          <div className="w-[50%]">
+        <div className="md:flex">
+          <div className="md:w-[50%]">
             <ChartComponent
               type="line"
               xaxis={titles}
@@ -34,7 +35,7 @@ export default function Dashboard() {
               seriesName="Prices"
             />
           </div>
-          <div className="w-[50%]">
+          <div className="md:w-[50%]">
             <ChartComponent
               type="bar"
               xaxis={titles}
