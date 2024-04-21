@@ -39,7 +39,7 @@ const Navbar = () => {
       {sidebarOpen && (
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="absolute z-50 top-[-10px] left-[50%] inline-flex items-center p-2 mt-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 ease-linear"
+          className="absolute z-50  left-[50%] inline-flex items-center p-2 mt-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 ease-linear"
         >
           <span className="sr-only">Open Close</span>
           <svg

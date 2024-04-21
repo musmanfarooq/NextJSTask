@@ -32,15 +32,14 @@ export default function Dashboard() {
       router.push("api/auth/signin");
     }
   });
-
   useEffect(() => {
-    setCopiedProducts(products);
     if (status === "authenticated") {
       dispatch(setLoading(true));
       axios
         .get("https://dummyjson.com/products")
         .then((response) => {
           dispatch(setProducts(response.data.products));
+          setCopiedProducts(response.data.products);
         })
         .catch((error) => {
           dispatch(setError(error.message));
